@@ -13,31 +13,15 @@ DB2 console mode does not support readline and autocomplete, this is a wrapper f
 
     $ db2c
     db2 => connect to testdb
+    or: db2 => use testdb
+    db2 => current date
+    db2 => -107
 
-   	Database Connection Information
+    Use the arrows for history, you can also use <CTRL>-r to search the history
 
-    Database server        = DB2/LINUXX8664 9.7.4
-    SQL authorization ID   = SAMER
-    Local database alias   = TESTDB
-
-    db2 => ? sql-107
-
-
-	SQL0107N  The name "<name>" is too long. The maximum length is
-	      "<length>".
-
-	...
-
-    db2 => values current date
-
-	1         
-	----------
-	11/17/2011
-
-	  1 record(s) selected.
-
-
-    Then use the arrows for history
+    You can pipe:
+    db2 => select * from large.table | less
+    db2 => select * from large.table | grep something
 
 ## OPTIONS
 

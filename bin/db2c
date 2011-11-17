@@ -5,7 +5,7 @@ if !system("which db2 > /dev/null 2> /dev/null")
   exit
 end
 
-if !system("which rlwrap > /dev/null 2> /dev/null")
+if !ARGV.include?('--no-rlwrap') && !system("which rlwrap > /dev/null 2> /dev/null")
   puts "This program depends on rlwrap, install rlwrap"
   exit
 end
@@ -32,4 +32,24 @@ if ARGV.include? '--man'
   exec "man #{cdir}/../man/db2c.1"
 end
 
-exec "rlwrap -A -pblue -f #{cdir}/ac -H ~/.db2c_history db2 #{ARGV.join(' ')}"
+unless ARGV.include? '--no-rlwrap'
+  exec "rlwrap -z pipeto -i -r -s 999999 -pBLUE -f #{cdir}/ac -H ~/.db2c_history db2c --no-rlwrap #{ARGV.join(' ')}"
+end
+
+$LOAD_PATH.unshift 'lib'
+require "db2c"
+
+Db2c::Command.debug = ARGV.any? { |arg| %w( -d --debug -debug debug ).include?(arg) }
+
+loop do
+  print Db2c::Command.prompt
+
+  begin
+    command = Db2c::Command.new $stdin.gets
+  rescue Interrupt
+    exit
+  end
+
+  exit if command.quit?
+  command.execute
+end

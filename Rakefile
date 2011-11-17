@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift 'lib'
-require "db2c/version"
+require "db2c"
 
 def version
   Db2c::VERSION

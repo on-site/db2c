@@ -23,6 +23,7 @@ Once you've made your great commits:
 Acknowledgement
 ------------
 
+Chris Jester-Young ([CKY][4]) found out the problem of using shell metacharacters when executing commands from Ruby.
 The initial script was inspired by [defunkt's repl][3], for a genenral purpose repl/wrapper, this is your friend.
 
 Meta
@@ -42,3 +43,4 @@ Samer Abukhait <samer@on-siteNOSPAM.com>, @s4mer
 [1]: http://help.github.com/forking/
 [2]: https://github.com/on-site/db2c/issues
 [3]: https://github.com/defunkt/repl
+[4]: https://github.com/cky
