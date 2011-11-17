@@ -1,0 +1,66 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "DB2C" "1" "November 2011" "" ""
+.
+.SH "NAME"
+\fBdb2c\fR \- a db2 console with with history and autocomplete support
+.
+.SH "SYNOPSIS"
+\fBdb2c\fR \fI\fIoptions\fR\fR <\.\.\.>
+.
+.SH "DESCRIPTION"
+DB2 console mode does not support readline and autocomplete, this is a wrapper for the db2 command with support for both\.
+.
+.SH "EXAMPLES"
+.
+.nf
+
+$ db2c
+db2 => connect to testdb
+
+Database Connection Information
+
+Database server        = DB2/LINUXX8664 9\.7\.4
+SQL authorization ID   = SAMER
+Local database alias   = TESTDB
+
+db2 => ? sql\-107
+
+
+SQL0107N  The name "<name>" is too long\. The maximum length is
+      "<length>"\.
+
+\.\.\.
+
+db2 => values current date
+
+1
+\-\-\-\-\-\-\-\-\-\-
+11/17/2011
+
+  1 record(s) selected\.
+
+
+Then use the arrows for history
+.
+.fi
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Displays usage information\.
+.
+.TP
+\fB\-\-man\fR
+Displays this man page\.
+.
+.SH "BUGS"
+\fIhttp://github\.com/on\-site/db2c/issues\fR
+.
+.SH "AUTHOR"
+Samer Abukhait \fIsamer@on\-siteNOSPAM\.com\fR, @s4mer
+.
+.SH "SEE ALSO"
+rlwrap(1), readline(3)

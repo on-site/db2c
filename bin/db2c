@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+if !system("which db2 > /dev/null 2> /dev/null")
+  puts "The db2 command was not found!"
+  exit
+end
+
+if !system("which rlwrap > /dev/null 2> /dev/null")
+  puts "This program depends on rlwrap, install rlwrap"
+  exit
+end
+
+def show_help
+  puts <<-help
+Usage: db2c
+
+Options:
+  --help    Display this message
+  --man     Display the man page
+
+Bug reports, suggestions, updates: http://github.com/on-site/db2c
+help
+  exit
+end
+
+if ARGV.any? { |arg| %w( -h --help -help help ).include?(arg) }
+  show_help
+end
+
+cdir = File.dirname(__FILE__)
+if ARGV.include? '--man'
+  exec "man #{cdir}/../man/db2c.1"
+end
+
+exec "rlwrap -A -pblue -f #{cdir}/ac -H ~/.db2c_history db2 #{ARGV.join(' ')}"

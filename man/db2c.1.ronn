@@ -1,0 +1,60 @@
+db2c(1) - a db2 console with with history and autocomplete support
+===================================
+
+## SYNOPSIS
+
+`db2c` <[options]> <...>
+
+## DESCRIPTION
+
+DB2 console mode does not support readline and autocomplete, this is a wrapper for the db2 command with support for both.
+
+## EXAMPLES
+
+    $ db2c
+    db2 => connect to testdb
+
+   	Database Connection Information
+
+    Database server        = DB2/LINUXX8664 9.7.4
+    SQL authorization ID   = SAMER
+    Local database alias   = TESTDB
+
+    db2 => ? sql-107
+
+
+	SQL0107N  The name "<name>" is too long. The maximum length is
+	      "<length>".
+
+	...
+
+    db2 => values current date
+
+	1         
+	----------
+	11/17/2011
+
+	  1 record(s) selected.
+
+
+    Then use the arrows for history
+
+## OPTIONS
+
+  * `-h`, `--help`:
+    Displays usage information.
+
+  * `--man`:
+    Displays this man page.
+
+## BUGS
+
+<http://github.com/on-site/db2c/issues>
+
+## AUTHOR
+
+Samer Abukhait <samer@on-siteNOSPAM.com>, @s4mer
+
+## SEE ALSO
+
+rlwrap(1), readline(3)
