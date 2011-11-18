@@ -3,33 +3,47 @@ db2c(1) - a db2 console with with history and autocomplete support
 
 ## SYNOPSIS
 
-`db2c` <[options]> <...>
+`db2c` <[options]>
 
-## DESCRIPTION
+## DESCRIPTION && EXAMPLES
 
 DB2 console mode does not support readline and autocomplete, this is a wrapper for the db2 command with support for both.
 
-## EXAMPLES
+  * **History**:
+    <pre>
+    db2 => connect to testdb (or: db2 => use testdb)
+    db2(testdb) => current date
+    db2(testdb) => -107
+    (Use the arrows for history, you can also use <CTRL>-r to search the history)
+    </pre>
 
-    $ db2c
-    db2 => connect to testdb
-    or: db2 => use testdb
-    db2 => current date
-    db2 => -107
+  * **Autocomplete**:
+    <pre>
+    db2(testdb) => sel[double-tab]
+    it remembers..
+    db2(testdb) => list tables for schema xyz
+    db2(testdb) => select * from xyz.tab[double-tab]
+    </pre>
 
-    Use the arrows for history, you can also use <CTRL>-r to search the history
+  * **You can pipe**:
+    <pre>
+    db2(testdb) => select * from large.table | grep -v something
+    db2(testdb) => select * from large.table | less
+    </pre>
 
-    You can pipe:
-    db2 => select * from large.table | less
-    db2 => select * from large.table | grep something
+  * If a command outputs long lines, you can use **less -S**:
+    <pre>
+    db2(testdb) => select * from table.with.many.columns | less -S
+    (you can scorll horizontally with left/right arrows)
+    </pre>
 
 ## OPTIONS
 
-  * `-h`, `--help`:
-    Displays usage information.
+  * `-h`, `--help`, `--man`:
+    Displays this help page.
 
-  * `--man`:
-    Displays this man page.
+  * `--debug`:
+    Displays annoying messages.
 
 ## BUGS
 

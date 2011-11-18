@@ -35,6 +35,9 @@ module Db2c
       if @input =~ /^connect to (.*)$/i
         @@cdb = $1.downcase
       end
+      if @input =~ /^disconnect #{@@cdb}$/i || @input =~ /^connect reset$/i
+        @@cdb = ''
+      end
     end
 
     def self.debug=(value)

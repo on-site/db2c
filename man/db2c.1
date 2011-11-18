@@ -7,38 +7,88 @@
 \fBdb2c\fR \- a db2 console with with history and autocomplete support
 .
 .SH "SYNOPSIS"
-\fBdb2c\fR \fI\fIoptions\fR\fR <\.\.\.>
+\fBdb2c\fR \fI\fIoptions\fR\fR
 .
-.SH "DESCRIPTION"
+.SH "DESCRIPTION && EXAMPLES"
 DB2 console mode does not support readline and autocomplete, this is a wrapper for the db2 command with support for both\.
 .
-.SH "EXAMPLES"
+.TP
+\fBHistory\fR
+.
+.IP "" 4
 .
 .nf
 
-$ db2c
-db2 => connect to testdb
-or: db2 => use testdb
-db2 => current date
-db2 => \-107
 
-Use the arrows for history, you can also use <CTRL>\-r to search the history
-
-You can pipe:
-db2 => select * from large\.table | less
-db2 => select * from large\.table | grep something
+db2 => connect to testdb (or: db2 => use testdb)
+db2(testdb) => current date
+db2(testdb) => \-107
+(Use the arrows for history, you can also use \fICTRL\fR\-r to search the history)
 .
 .fi
+.
+.IP "" 0
+
+.
+.TP
+\fBAutocomplete\fR
+.
+.IP "" 4
+.
+.nf
+
+
+db2(testdb) => sel[double\-tab]
+it remembers\.\.
+db2(testdb) => list tables for schema xyz
+db2(testdb) => select * from xyz\.tab[double\-tab]
+.
+.fi
+.
+.IP "" 0
+
+.
+.TP
+\fBYou can pipe\fR
+.
+.IP "" 4
+.
+.nf
+
+
+db2(testdb) => select * from large\.table | grep \-v something
+db2(testdb) => select * from large\.table | less
+.
+.fi
+.
+.IP "" 0
+
+.
+.TP
+If a command outputs long lines, you can use \fBless \-S\fR
+.
+.IP "" 4
+.
+.nf
+
+
+db2(testdb) => select * from table\.with\.many\.columns | less \-S
+(you can scorll horizontally with left/right arrows)
+.
+.fi
+.
+.IP "" 0
+
 .
 .SH "OPTIONS"
 .
 .TP
-\fB\-h\fR, \fB\-\-help\fR
-Displays usage information\.
+\fB\-h\fR, \fB\-\-help\fR, \fB\-\-man\fR
+Displays this help page\.
 .
 .TP
-\fB\-\-man\fR
-Displays this man page\.
+\fB\-\-debug\fR
+Displays annoying messages\.
 .
 .SH "BUGS"
 \fIhttp://github\.com/on\-site/db2c/issues\fR
