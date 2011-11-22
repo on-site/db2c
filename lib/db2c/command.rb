@@ -8,12 +8,7 @@ module Db2c
       if input
         puts "initializing: #{input}" if @@debug
         @input = input.chomp.strip
-        @input.gsub! /^db2 /i, ''
-        @input.gsub! /;$/, ''
-        @input.gsub! /^use /, 'connect to '
-        @input.insert 0, "? sql" if @input =~ /^\-\d+$/
-        @input.insert 0, "? " if @input =~ /^\d+$/
-        @input.insert 0, "values " if @input =~ /^current.+$/i
+        parse
       end
     end
 
@@ -21,16 +16,35 @@ module Db2c
       @input
     end
 
+    def parse
+      @input.gsub! /^db2 /i, ''
+      @input.gsub! /;$/, ''
+      @input.gsub! /^use /, 'connect to '
+      @input.gsub! /^\\d /, 'describe '
+      @input.insert 0, "? sql" if @input =~ /^\-\d+$/
+      @input.insert 0, "? " if @input =~ /^\d+$/
+      @input.insert 0, "values " if @input =~ /^current.+$/i
+
+      if @input =~ /describe [^. ]+\.[^.+ ]+/
+        @input.gsub! /describe /, 'describe table '
+      end
+    end
+
     def quit?
-      @input.nil? || @input =~ /^(exit|quit)$/
+      @input.nil? || @input =~ /^(exit|quit|\\q|\\quit)$/
+    end
+
+    def history?
+      @input =~ /^(history|hist|\\history|\\hist)$/
     end
 
     def valid?
-      @input && @input.length > 0
+      !quit? && !history?
     end
 
     def execute
       puts "executing: #{@input}" if @@debug
+      system 'less ~/.db2c_history' if history?
       system 'db2', @input if valid?
       if @input =~ /^connect to (.*)$/i
         @@cdb = $1.downcase
