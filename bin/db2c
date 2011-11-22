@@ -1,37 +1,24 @@
 #!/usr/bin/env ruby
 
-if !system("which db2 > /dev/null 2> /dev/null")
-  puts "The db2 command was not found!"
-  exit
-end
-
-if !ARGV.include?('--no-rlwrap') && !system("which rlwrap > /dev/null 2> /dev/null")
-  puts "This program depends on rlwrap, install rlwrap"
-  exit
-end
-
-cdir = File.dirname(__FILE__)
-unless (ARGV & %w{h help -help --help --man}).empty?
-  exec "man #{cdir}/../man/db2c.1"
-end
-unless ARGV.include? '--no-rlwrap'
-  exec "rlwrap -z pipeto -i -r -s 999999 -pBLUE -f #{cdir}/ac -H ~/.db2c_history db2c --no-rlwrap #{ARGV.join(' ')}"
-end
-
 $LOAD_PATH.unshift 'lib'
 require "db2c"
 
-Db2c::Command.debug = !(ARGV & %w{ -d --debug -debug debug }).empty?
+run = Db2c::Run.new *ARGV
+
+run.die "The db2 command was not found!" unless system("which db2 > /dev/null 2> /dev/null")
+run.die "This program depends on rlwrap, install rlwrap" if run.wrap? && !system("which rlwrap > /dev/null 2> /dev/null")
+
+exec "man #{run.gdir}/man/db2c.1" if run.help?
+
+exec "rlwrap -z pipeto -i -r -s 999999 -pBLUE -f #{run.autocomplete} -H ~/.db2c_history db2c --no-rlwrap #{run.args}" if run.wrap?
 
 loop do
   print Db2c::Command.prompt
-
   begin
     command = Db2c::Command.new $stdin.gets
   rescue Interrupt
     exit
   end
-
   exit if command.quit?
   command.execute
 end

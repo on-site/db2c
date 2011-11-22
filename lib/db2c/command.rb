@@ -44,6 +44,10 @@ module Db2c
       @@debug = value
     end
 
+    def self.debug?
+      @@debug
+    end
+
     def self.prompt
       "db2c".tap do |pr|
         pr << "(#{@@cdb})" if @@cdb.length > 0

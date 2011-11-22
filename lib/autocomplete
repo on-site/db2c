@@ -145,7 +145,6 @@ deferred
 delete
 desc
 describe
-descriptor
 deterministic
 diagnostics
 dimensions
@@ -158,7 +157,6 @@ domain
 do
 double
 drop
-dropin
 dynamic
 dynamic_function
 each
@@ -181,7 +179,6 @@ exclusive
 exec
 execute
 exists
-exit
 explain
 extension
 external
@@ -239,7 +236,6 @@ insert
 instead
 insts_per_argbyte
 insts_per_invoc
-int
 integer
 integrity
 intersect
@@ -247,7 +243,6 @@ interval
 into
 ios_per_argbyte
 ios_per_invoc
-iso
 iterate
 isolation
 java
@@ -381,7 +376,6 @@ reads
 real
 recommend
 recovery
-ref
 reference
 references
 referencing
@@ -433,14 +427,12 @@ seconds
 secqty
 section
 select
-self
 sequence
 serializable
 server
 server_name
 session
 session_user
-set
 sets
 share
 signal
@@ -452,7 +444,6 @@ some
 source
 space
 specific
-sql
 sqlcode
 sqlerror
 sqlexception
@@ -475,7 +466,6 @@ synonym
 system
 system_user
 table
-tables
 table_name
 tablespace
 tablespaces
@@ -487,7 +477,6 @@ timestamp
 timezone
 timezone_hour
 timezone_minute
-to
 trailing
 transaction
 transform
@@ -536,5 +525,4 @@ wrapper
 write
 year
 years
-yes
 zone
