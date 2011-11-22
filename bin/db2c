@@ -5,11 +5,7 @@ require "db2c"
 
 run = Db2c::Run.new *ARGV
 
-run.die "The db2 command was not found!" unless system("which db2 > /dev/null 2> /dev/null")
-run.die "This program depends on rlwrap, install rlwrap" if run.wrap? && !system("which rlwrap > /dev/null 2> /dev/null")
-
 exec "man #{run.gdir}/man/db2c.1" if run.help?
-
 exec "rlwrap -z pipeto -i -r -s 999999 -pBLUE -f #{run.autocomplete} -H ~/.db2c_history db2c --no-rlwrap #{run.args}" if run.wrap?
 
 loop do

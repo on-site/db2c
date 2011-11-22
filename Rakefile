@@ -9,6 +9,12 @@ def git(command)
   system("git #{command}")
 end
 
+desc "Build and install gem"
+task :build do
+  sh "gem build db2c.gemspec"
+  sh "gem install db2c-#{version}.gem"
+end
+
 desc "Push new version"
 task :publish do
   git "tag v#{version}"
