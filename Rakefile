@@ -11,6 +11,7 @@ end
 
 desc "Build and install gem"
 task :build do
+  sh "ronn man/*.ronn"
   sh "gem build db2c.gemspec"
   sh "gem install db2c-#{version}.gem"
 end

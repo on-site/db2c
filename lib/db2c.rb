@@ -1,6 +1,6 @@
 module Db2c
   DEFAULT_PROMPT = "db2c => "
-  VERSION = "0.0.3"
+  VERSION = "0.0.4"
 end
 
 require "db2c/run.rb"

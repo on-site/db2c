@@ -1,4 +1,4 @@
-db2c(1) - a db2 console with with history and autocomplete support
+db2c(1) - A DB2 console with with history and autocomplete support, and few other goodies
 ===================================
 
 ## SYNOPSIS
@@ -15,6 +15,8 @@ DB2 console mode does not support readline and autocomplete, this is a wrapper f
     db2(testdb) => current date
     db2(testdb) => -107
     (Use the arrows for history, you can also use <CTRL>-r to search the history)
+    db2(testdb) => history
+    (To see a list of all saved history lines)
     </pre>
 
   * **Autocomplete**:
@@ -31,10 +33,19 @@ DB2 console mode does not support readline and autocomplete, this is a wrapper f
     db2(testdb) => select * from large.table | less
     </pre>
 
-  * If a command outputs long lines, you can use **less -S**:
+  * For example, if a command outputs long lines, **less -S** is your friend:
     <pre>
     db2(testdb) => select * from table.with.many.columns | less -S
     (you can scorll horizontally with left/right arrows)
+    </pre>
+
+  * You can use _some psql-like_ commands
+    <pre>
+    db2(testdb) => **\d schema.table**
+      == describe table schema.table
+    db2(testdb) => **\h**
+      == To see this help from within the console
+    db2(testdb) => **\q**
     </pre>
 
 ## OPTIONS
@@ -44,6 +55,9 @@ DB2 console mode does not support readline and autocomplete, this is a wrapper f
 
   * `--debug`:
     Displays annoying messages.
+
+  * `--no-rlrwap`:
+    Don't use rlwrap
 
 ## BUGS
 

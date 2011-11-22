@@ -38,13 +38,16 @@ module Db2c
       @input =~ /^(history|hist|\\history|\\hist)$/
     end
 
+    def help?
+      @input =~ /^(help|h|\\help|\\h)$/
+    end
+
     def valid?
-      !quit? && !history?
+      !quit? && !history? && !help?
     end
 
     def execute
       puts "executing: #{@input}" if @@debug
-      system 'less ~/.db2c_history' if history?
       system 'db2', @input if valid?
       if @input =~ /^connect to (.*)$/i
         @@cdb = $1.downcase

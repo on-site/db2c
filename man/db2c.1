@@ -4,7 +4,7 @@
 .TH "DB2C" "1" "November 2011" "" ""
 .
 .SH "NAME"
-\fBdb2c\fR \- a db2 console with with history and autocomplete support
+\fBdb2c\fR \- A DB2 console with with history and autocomplete support, and few other goodies
 .
 .SH "SYNOPSIS"
 \fBdb2c\fR \fI\fIoptions\fR\fR
@@ -12,8 +12,8 @@
 .SH "DESCRIPTION && EXAMPLES"
 DB2 console mode does not support readline and autocomplete, this is a wrapper for the db2 command with support for both\.
 .
-.TP
-\fBHistory\fR
+.IP "\(bu" 4
+\fBHistory\fR:
 .
 .IP "" 4
 .
@@ -24,14 +24,16 @@ db2 => connect to testdb (or: db2 => use testdb)
 db2(testdb) => current date
 db2(testdb) => \-107
 (Use the arrows for history, you can also use \fICTRL\fR\-r to search the history)
+db2(testdb) => history
+(To see a list of all saved history lines)
 .
 .fi
 .
 .IP "" 0
 
 .
-.TP
-\fBAutocomplete\fR
+.IP "\(bu" 4
+\fBAutocomplete\fR:
 .
 .IP "" 4
 .
@@ -48,8 +50,8 @@ db2(testdb) => select * from xyz\.tab[double\-tab]
 .IP "" 0
 
 .
-.TP
-\fBYou can pipe\fR
+.IP "\(bu" 4
+\fBYou can pipe\fR:
 .
 .IP "" 4
 .
@@ -64,8 +66,8 @@ db2(testdb) => select * from large\.table | less
 .IP "" 0
 
 .
-.TP
-If a command outputs long lines, you can use \fBless \-S\fR
+.IP "\(bu" 4
+For example, if a command outputs long lines, \fBless \-S\fR is your friend:
 .
 .IP "" 4
 .
@@ -80,6 +82,27 @@ db2(testdb) => select * from table\.with\.many\.columns | less \-S
 .IP "" 0
 
 .
+.IP "\(bu" 4
+You can use \fIsome psql\-like\fR commands
+.
+.IP "" 4
+.
+.nf
+
+
+db2(testdb) => \fB\ed schema\.table\fR
+  == describe table schema\.table
+db2(testdb) => \fB\eh\fR
+  == To see this help from within the console
+db2(testdb) => \fB\eq\fR
+.
+.fi
+.
+.IP "" 0
+
+.
+.IP "" 0
+.
 .SH "OPTIONS"
 .
 .TP
@@ -89,6 +112,10 @@ Displays this help page\.
 .TP
 \fB\-\-debug\fR
 Displays annoying messages\.
+.
+.TP
+\fB\-\-no\-rlrwap\fR
+Don\'t use rlwrap
 .
 .SH "BUGS"
 \fIhttp://github\.com/on\-site/db2c/issues\fR

@@ -16,5 +16,7 @@ loop do
     exit
   end
   exit if command.quit?
+  system 'less ~/.db2c_history' if command.history?
+  system "man #{run.gdir}/man/db2c.1" if command.help?
   command.execute
 end

@@ -18,7 +18,13 @@ describe Db2c::Command do
     Db2c::Command.new('\q').should be_quit
     Db2c::Command.new('\quit').should be_quit
   end
-  it 'supports history command' do
+  it 'supports history commands' do
     Db2c::Command.new('history').should be_history
+    Db2c::Command.new('\hist').should be_history
+  end
+  it 'supports help command' do
+    Db2c::Command.new('help').should be_help
+    Db2c::Command.new('\help').should be_help
+    Db2c::Command.new('\h').should be_help
   end
 end
