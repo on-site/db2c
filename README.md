@@ -1,13 +1,13 @@
-a db2 console with with history and autocomplete support
+A DB2 console with history and autocomplete support, and few other goodies
 ====================================
 
-DB2 console mode does not support readline and autocomplete, this is a wrapper for the db2 command with support for both.
+DB2 console mode does not support readline and autocomplete, this is a wrapper for the db2 command mode with support for both. It also tries to make using db2 a little bit more tolerable, adding support for psql-like commands and other shortcuts.
 
 Install
 -------
 
-  $ apt-get install [rlwrap][0]
-  $ gem install db2c
+* apt-get install [rlwrap][0]
+* gem install db2c
 
 Contributing
 ------------
@@ -23,8 +23,8 @@ Once you've made your great commits:
 Acknowledgement
 ------------
 
-Chris Jester-Young ([CKY][4]) found out the problem of using shell metacharacters when executing commands from Ruby.
-The initial script was inspired by [defunkt's repl][3], for a genenral purpose repl/wrapper, this is your friend.
+* Chris Jester-Young ([CKY][4]) found out the problem of using shell metacharacters when executing commands from Ruby.
+* The initial script was inspired by [defunkt's repl][3], for a genenral purpose repl/wrapper, this is your friend.
 
 Meta
 ----
