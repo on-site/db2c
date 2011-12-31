@@ -20,13 +20,18 @@ module Db2c
       @input.gsub! /^db2 /i, ''
       @input.gsub! /;$/, ''
       @input.gsub! /^use /, 'connect to '
-      @input.gsub! /^\\d /, 'describe '
       @input.insert 0, "? sql" if @input =~ /^\-\d+$/
       @input.insert 0, "? " if @input =~ /^\d+$/
       @input.insert 0, "values " if @input =~ /^current.+$/i
 
       if @input =~ /describe [^. ]+\.[^.+ ]+/
         @input.gsub! /describe /, 'describe table '
+        return
+      end
+
+      if @input =~ /^(show|list) databases/ || @input == '\l'
+        @input = "list database directory"
+        return
       end
     end
 
@@ -70,6 +75,10 @@ module Db2c
         pr << "(#{@@cdb})" if @@cdb.length > 0
         pr << " => "
       end
+    end
+
+    def self.execute command
+      new(command).execute
     end
 
   end

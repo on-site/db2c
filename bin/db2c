@@ -6,7 +6,11 @@ require "db2c"
 run = Db2c::Run.new *ARGV
 
 exec "man #{run.gdir}/man/db2c.1" if run.help?
-exec "rlwrap -z pipeto -i -r -s 999999 -pBLUE -f #{run.autocomplete} -H ~/.db2c_history db2c --no-rlwrap #{run.args}" if run.wrap?
+
+puts "wrapping #{$0} #{run.args}" if run.debug? && !run.nowrap?
+exec "rlwrap -z pipeto -i -r -s 999999 -pBLUE -f #{run.autocomplete} -H ~/.db2c_history #{$0} --now #{run.args}" unless run.nowrap?
+
+Db2c::Command.execute "use #{run.default_db}" if run.default_db
 
 loop do
   print Db2c::Command.prompt
