@@ -27,4 +27,14 @@ describe Db2c::Command do
     Db2c::Command.new('\help').should be_help
     Db2c::Command.new('\h').should be_help
   end
+
+  it 'supports \l' do
+    Db2c::Command.new('\l').to_s.should == 'list database directory'
+  end
+  it 'supports \dt' do
+    Db2c::Command.new('\dt').to_s.should == 'list tables'
+  end
+  it 'supports \dt schema' do
+    Db2c::Command.new('\dt hr').to_s.should == 'list tables for schema hr'
+  end
 end

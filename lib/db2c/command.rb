@@ -7,8 +7,8 @@ module Db2c
     def initialize input
       if input
         puts "initializing: #{input}" if @@debug
-        @input = input.chomp.strip
-        parse
+        @input = input.chomp.strip.gsub(/^db2 /i,'').gsub(/;$/,'')
+        parse unless @input =~ /^(select|update|delete|insert)/i
       end
     end
 
@@ -17,13 +17,9 @@ module Db2c
     end
 
     def parse
-      @input.gsub! /^db2 /i, ''
-      @input.gsub! /;$/, ''
       @input.gsub! /^use /, 'connect to '
-      @input.insert 0, "? sql" if @input =~ /^\-\d+$/
-      @input.insert 0, "? " if @input =~ /^\d+$/
-      @input.insert 0, "values " if @input =~ /^current.+$/i
 
+      @input.gsub! /^\\d /, 'describe '
       if @input =~ /describe [^. ]+\.[^.+ ]+/
         @input.gsub! /describe /, 'describe table '
         return
@@ -33,6 +29,24 @@ module Db2c
         @input = "list database directory"
         return
       end
+
+      if @input =~ /^\\dt ?(\w*)$/
+        @input = "list tables"
+        @input += " for schema #{$1}" unless $1.empty?
+        return
+      end
+
+      shortcuts
+    end
+
+    def shortcuts
+      prepend /^\-\d+$/, "? sql"
+      prepend /^\d+$/, "? "
+      prepend /^current.+$/i, "values "
+    end
+
+    def prepend regex, value
+      @input.insert 0, value if @input =~ regex
     end
 
     def quit?
