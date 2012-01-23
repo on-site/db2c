@@ -41,10 +41,14 @@ DB2 console mode does not support readline and autocomplete, this is a wrapper f
 
   * You can use _some psql-like_ commands
     <pre>
-    db2(testdb) => **\d schema.table**
-      == describe table schema.table
     db2(testdb) => **\h**
       == To see this help from within the console
+    db2(testdb) => **\l**
+      == list database directory
+    db2(testdb) => **\dt hr**
+      == list tables for schema hr
+    db2(testdb) => **\d schema.table**
+      == describe table schema.table
     db2(testdb) => **\q**
     </pre>
 
