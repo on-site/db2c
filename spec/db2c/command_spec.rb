@@ -31,10 +31,13 @@ describe Db2c::Command do
   it 'supports \l' do
     Db2c::Command.new('\l').to_s.should == 'list database directory'
   end
-  it 'supports \dt' do
-    Db2c::Command.new('\dt').to_s.should == 'list tables'
+  it 'supports \lt' do
+    Db2c::Command.new('\lt').to_s.should == 'list tables'
   end
-  it 'supports \dt schema' do
-    Db2c::Command.new('\dt hr').to_s.should == 'list tables for schema hr'
+  it 'supports \lt all' do
+    Db2c::Command.new('\lt all').to_s.should == 'list tables for all'
+  end
+  it 'supports \lt schema' do
+    Db2c::Command.new('\lt hr').to_s.should == 'list tables for schema hr'
   end
 end

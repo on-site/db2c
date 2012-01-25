@@ -30,9 +30,11 @@ module Db2c
         return
       end
 
-      if @input =~ /^\\dt ?(\w*)$/
+      if @input =~ /^\\lt ?(\w*)$/
         @input = "list tables"
-        @input += " for schema #{$1}" unless $1.empty?
+        unless $1.empty?
+          @input += $1 == "all" ? " for all" : " for schema #{$1}"
+        end
         return
       end
 

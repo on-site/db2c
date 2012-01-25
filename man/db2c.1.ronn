@@ -3,7 +3,7 @@ db2c(1) - A DB2 console with with history and autocomplete support, and few othe
 
 ## SYNOPSIS
 
-`db2c` <[options]>
+`db2c` [<options>] [dbname]
 
 ## DESCRIPTION && EXAMPLES
 
@@ -45,7 +45,9 @@ DB2 console mode does not support readline and autocomplete, this is a wrapper f
       == To see this help from within the console
     db2(testdb) => **\l**
       == list database directory
-    db2(testdb) => **\dt hr**
+    db2(testdb) => **\lt all**
+      == list tables for all schemas
+    db2(testdb) => **\lt hr**
       == list tables for schema hr
     db2(testdb) => **\d schema.table**
       == describe table schema.table

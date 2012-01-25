@@ -1,7 +1,7 @@
 .\" generated with Ronn/v0.7.3
 .\" http://github.com/rtomayko/ronn/tree/0.7.3
 .
-.TH "DB2C" "1" "November 2011" "" ""
+.TH "DB2C" "1" "January 2012" "" ""
 .
 .SH "NAME"
 \fBdb2c\fR \- A DB2 console with with history and autocomplete support, and few other goodies
@@ -90,10 +90,14 @@ You can use \fIsome psql\-like\fR commands
 .nf
 
 
-db2(testdb) => \fB\ed schema\.table\fR
-  == describe table schema\.table
 db2(testdb) => \fB\eh\fR
   == To see this help from within the console
+db2(testdb) => \fB\el\fR
+  == list database directory
+db2(testdb) => \fB\edt hr\fR
+  == list tables for schema hr
+db2(testdb) => \fB\ed schema\.table\fR
+  == describe table schema\.table
 db2(testdb) => \fB\eq\fR
 .
 .fi
