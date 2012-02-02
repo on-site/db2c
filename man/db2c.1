@@ -51,22 +51,6 @@ db2(testdb) => select * from xyz\.tab[double\-tab]
 
 .
 .IP "\(bu" 4
-\fBYou can pipe\fR:
-.
-.IP "" 4
-.
-.nf
-
-
-db2(testdb) => select * from large\.table | grep \-v something
-db2(testdb) => select * from large\.table | less
-.
-.fi
-.
-.IP "" 0
-
-.
-.IP "\(bu" 4
 For example, if a command outputs long lines, \fBless \-S\fR is your friend:
 .
 .IP "" 4
@@ -143,13 +127,29 @@ db2(testdb) => \fB\eh\fR
   == To see this help from within the console
 db2(testdb) => \fB\el\fR
   == list database directory
-db2(testdb) => \fB\elt all\fR
-  == list tables for all schemas
-db2(testdb) => \fB\elt hr\fR
-  == list tables for schema hr
+db2(testdb) => \fB\elt [all|schema]\fR
+  == list tables for all or one schema using db2 list command
+db2(testdb) => \fB\el[t|v|a|s] [schema]\fR
+  == list tables|views|aliases|summary\-tables for all or one schema using syscat\.tables
 db2(testdb) => \fB\ed schema\.table\fR
   == describe table schema\.table
 db2(testdb) => \fB\eq\fR
+.
+.fi
+.
+.IP "" 0
+
+.
+.IP "\(bu" 4
+\fBYou can pipe\fR:
+.
+.IP "" 4
+.
+.nf
+
+
+db2(testdb) => \edv | grep \-v SYS
+db2(testdb) => select * from large\.table | less
 .
 .fi
 .

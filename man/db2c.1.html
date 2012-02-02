@@ -98,11 +98,6 @@ it remembers..
 db2(testdb) => list tables for schema xyz
 db2(testdb) => select * from xyz.tab[double-tab]
 </pre></li>
-<li><p><strong>You can pipe</strong>:
-</p><pre>
-db2(testdb) => select * from large.table | grep -v something
-db2(testdb) => select * from large.table | less
-</pre></li>
 <li><p>For example, if a command outputs long lines, <strong>less -S</strong> is your friend:
 </p><pre>
 db2(testdb) => select * from table.with.many.columns | less -S
@@ -130,13 +125,18 @@ db2(testdb) => <strong>\h</strong>
   == To see this help from within the console
 db2(testdb) => <strong>\l</strong>
   == list database directory
-db2(testdb) => <strong>\lt all</strong>
-  == list tables for all schemas
-db2(testdb) => <strong>\lt hr</strong>
-  == list tables for schema hr
+db2(testdb) => <strong>\lt [all|schema]</strong>
+  == list tables for all or one schema using db2 list command
+db2(testdb) => <strong>\l[t|v|a|s] [schema]</strong>
+  == list tables|views|aliases|summary-tables for all or one schema using syscat.tables
 db2(testdb) => <strong>\d schema.table</strong>
   == describe table schema.table
 db2(testdb) => <strong>\q</strong>
+</pre></li>
+<li><p><strong>You can pipe</strong>:
+</p><pre>
+db2(testdb) => \dv | grep -v SYS
+db2(testdb) => select * from large.table | less
 </pre></li>
 </ul>
 
@@ -157,7 +157,7 @@ db2(testdb) => <strong>\q</strong>
 
 <h2 id="AUTHOR">AUTHOR</h2>
 
-<p>Samer Abukhait <a href="&#109;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#x3a;&#115;&#x61;&#x6d;&#x65;&#114;&#64;&#111;&#x6e;&#45;&#x73;&#105;&#x74;&#101;&#x4e;&#x4f;&#83;&#80;&#x41;&#x4d;&#46;&#x63;&#111;&#x6d;" data-bare-link="true">&#115;&#97;&#109;&#x65;&#x72;&#x40;&#111;&#x6e;&#x2d;&#x73;&#105;&#x74;&#101;&#78;&#x4f;&#x53;&#80;&#65;&#x4d;&#x2e;&#99;&#x6f;&#109;</a>, @s4mer</p>
+<p>Samer Abukhait <a href="&#x6d;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#115;&#97;&#x6d;&#101;&#114;&#x40;&#x6f;&#110;&#x2d;&#115;&#x69;&#x74;&#x65;&#78;&#x4f;&#83;&#80;&#x41;&#x4d;&#46;&#99;&#x6f;&#x6d;" data-bare-link="true">&#x73;&#97;&#x6d;&#101;&#114;&#64;&#111;&#x6e;&#45;&#115;&#105;&#116;&#x65;&#x4e;&#79;&#x53;&#80;&#65;&#x4d;&#46;&#x63;&#x6f;&#x6d;</a>, @s4mer</p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 

@@ -1,6 +1,7 @@
 module Db2c
   class Command
 
+    include CONSTANTS
     @@cdb = ''
 
     def initialize input
@@ -34,6 +35,14 @@ module Db2c
         unless $1.empty?
           @input += $1 == "all" ? " for all" : " for schema #{$1}"
         end
+        return
+      end
+
+      if @input =~ /^\\d([a|s|t|v]) ?(\w*)$/
+        @input = DTSELECT
+        @input += " where type = '#{$1.upcase}'"
+        @input += " and tabschema = '#{$2.upcase}'" unless $2.empty?
+        @input += " #{DTORDER}"
         return
       end
 

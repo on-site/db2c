@@ -27,12 +27,6 @@ DB2 console mode does not support readline and autocomplete, this is a wrapper f
     db2(testdb) => select * from xyz.tab[double-tab]
     </pre>
 
-  * **You can pipe**:
-    <pre>
-    db2(testdb) => select * from large.table | grep -v something
-    db2(testdb) => select * from large.table | less
-    </pre>
-
   * For example, if a command outputs long lines, **less -S** is your friend:
     <pre>
     db2(testdb) => select * from table.with.many.columns | less -S
@@ -64,14 +58,21 @@ DB2 console mode does not support readline and autocomplete, this is a wrapper f
       == To see this help from within the console
     db2(testdb) => **\l**
       == list database directory
-    db2(testdb) => **\lt all**
-      == list tables for all schemas
-    db2(testdb) => **\lt hr**
-      == list tables for schema hr
+    db2(testdb) => **\lt [all|schema]**
+      == list tables for all or one schema using db2 list command
+    db2(testdb) => **\l[t|v|a|s] [schema]**
+      == list tables|views|aliases|summary-tables for all or one schema using syscat.tables
     db2(testdb) => **\d schema.table**
       == describe table schema.table
     db2(testdb) => **\q**
     </pre>
+
+  * **You can pipe**:
+    <pre>
+    db2(testdb) => \dv | grep -v SYS
+    db2(testdb) => select * from large.table | less
+    </pre>
+
 
 ## OPTIONS
 
