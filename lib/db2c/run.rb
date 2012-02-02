@@ -7,7 +7,6 @@ module Db2c
       puts "args: #{@args.inspect}" if debug?
       @gdir = File.expand_path('../../../', __FILE__)
       puts "cdir: #{@gdir.inspect}" if debug?
-      Db2c::Command.debug = debug?
 
       die "version #{Db2c::VERSION}" if version?
       die "The db2 command was not found!" unless system("which db2 > /dev/null 2> /dev/null")
@@ -25,6 +24,9 @@ module Db2c
     end
     def nowrap?
       !(@args & %w{--no-rlwrap --now}).empty?
+    end
+    def multiline?
+      !(@args & %w{-t}).empty?
     end
 
     def default_db

@@ -2,12 +2,11 @@ module Db2c
   class Command
 
     @@cdb = ''
-    @@debug = false
 
     def initialize input
       if input
-        puts "initializing: #{input}" if @@debug
-        @input = input.chomp.strip.gsub(/^db2 /i,'').gsub(/;$/,'')
+        puts "initializing: #{input}" if $DB2CDBG
+        @input = input.chomp.strip.gsub(/^db2 /i,'')
         parse unless @input =~ /^(select|update|delete|insert)/i
       end
     end
@@ -68,7 +67,7 @@ module Db2c
     end
 
     def execute
-      puts "executing: #{@input}" if @@debug
+      puts "executing: #{@input}" if $DB2CDBG
       system 'db2', @input if valid?
       if @input =~ /^connect to (.*)$/i
         @@cdb = $1.downcase
@@ -76,14 +75,6 @@ module Db2c
       if @input =~ /^disconnect #{@@cdb}$/i || @input =~ /^connect reset$/i
         @@cdb = ''
       end
-    end
-
-    def self.debug=(value)
-      @@debug = value
-    end
-
-    def self.debug?
-      @@debug
     end
 
     def self.prompt

@@ -4,6 +4,7 @@ $LOAD_PATH.unshift 'lib'
 require "db2c"
 
 run = Db2c::Run.new *ARGV
+$DB2CDBG = run.debug?
 
 exec "man #{run.gdir}/man/db2c.1" if run.help?
 
@@ -11,16 +12,30 @@ puts "wrapping #{$0} #{run.args}" if run.debug? && !run.nowrap?
 exec "rlwrap -z pipeto -i -r -s 999999 -pBLUE -f #{run.autocomplete} -H ~/.db2c_history #{$0} --now #{run.args}" unless run.nowrap?
 
 Db2c::Command.execute "use #{run.default_db}" if run.default_db
+$/ = ";" if run.multiline?
 
 loop do
   print Db2c::Command.prompt
   begin
-    command = Db2c::Command.new $stdin.gets
+    input = $stdin.gets
+    input = input.gsub(/;$/,'') if input
+    if input =~ /^(edit|vi|vim|emacs)$/
+      command = Db2c::Command.new Db2c::Editor.edit input
+      next if command.quit?
+    elsif input =~ /^(cat|cp|date|df|du|find|grep|irb|kill|less|ls|man|more|mv|ps|rm|sudo|tail|touch|top|wc|which|who)/
+      system input
+      next
+    elsif input =~ /^!/
+      system input[1..-1]
+      next
+    else
+      command = Db2c::Command.new input
+    end
   rescue Interrupt
     exit
   end
   exit if command.quit?
-  system 'less ~/.db2c_history' if command.history?
+  system 'cat ~/.db2c_history' if command.history?
   system "man #{run.gdir}/man/db2c.1" if command.help?
   command.execute
 end

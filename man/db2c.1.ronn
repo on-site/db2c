@@ -39,7 +39,26 @@ DB2 console mode does not support readline and autocomplete, this is a wrapper f
     (you can scorll horizontally with left/right arrows)
     </pre>
 
-  * You can use _some psql-like_ commands
+  * **You can edit last statement or use the editor to write a new multiline statement**:
+    <pre>
+    db2(testdb) => edit
+    db2(testdb) => emacs
+    </pre>
+
+  * **Any !command will be sent to the shell as is**:
+    <pre>
+    db2(testdb) => !clear
+    </pre>
+
+  * You can use _some_ common shell commands directly:
+    <pre>
+    db2(testdb) => ls ~
+    db2(testdb) => less ~/somefile
+    db2(testdb) => top
+    db2(testdb) => irb
+    </pre>
+
+  * You can use _some psql-like_ meta commands
     <pre>
     db2(testdb) => **\h**
       == To see this help from within the console
@@ -58,6 +77,9 @@ DB2 console mode does not support readline and autocomplete, this is a wrapper f
 
   * `-h`, `--help`, `--man`:
     Displays this help page.
+
+  * `-t`:
+   Commands will be executed when you enter a terminating semicolon (;)
 
   * `--debug`:
     Displays annoying messages.

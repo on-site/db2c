@@ -5,3 +5,4 @@ end
 
 require "db2c/run.rb"
 require "db2c/command.rb"
+require "db2c/editor.rb"
