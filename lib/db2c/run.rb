@@ -37,6 +37,10 @@ module Db2c
       "#{@gdir}/lib/autocomplete"
     end
 
+    def filters
+      "#{@gdir}/rlwrap/filters"
+    end
+
     def args
       @args.join(' ')
     end
