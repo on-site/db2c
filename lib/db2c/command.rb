@@ -77,12 +77,13 @@ module Db2c
 
     def execute
       puts "executing: #{@input}" if $DB2CDBG
-      system 'db2', @input if valid?
-      if @input =~ /^connect to (.*)$/i
-        @@cdb = $1.downcase
-      end
-      if @input =~ /^disconnect #{@@cdb}$/i || @input =~ /^connect reset$/i
-        @@cdb = ''
+      if valid? && system('db2', @input)
+        if @input =~ /^connect to (.*)$/i
+          @@cdb = $1.downcase
+        end
+        if @input =~ /^disconnect #{@@cdb}$/i || @input =~ /^connect reset$/i
+          @@cdb = ''
+        end
       end
     end
 

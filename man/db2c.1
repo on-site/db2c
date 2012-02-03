@@ -51,22 +51,6 @@ db2(testdb) => select * from xyz\.tab[double\-tab]
 
 .
 .IP "\(bu" 4
-For example, if a command outputs long lines, \fBless \-S\fR is your friend:
-.
-.IP "" 4
-.
-.nf
-
-
-db2(testdb) => select * from table\.with\.many\.columns | less \-S
-(you can scorll horizontally with left/right arrows)
-.
-.fi
-.
-.IP "" 0
-
-.
-.IP "\(bu" 4
 \fBYou can edit last statement or use the editor to write a new multiline statement\fR:
 .
 .IP "" 4
@@ -150,6 +134,22 @@ db2(testdb) => \fB\eq\fR
 
 db2(testdb) => \edv | grep \-v SYS
 db2(testdb) => select * from large\.table | less
+.
+.fi
+.
+.IP "" 0
+
+.
+.IP "\(bu" 4
+For example, if a command outputs long lines, \fBless \-S\fR is your friend:
+.
+.IP "" 4
+.
+.nf
+
+
+db2(testdb) => select * from table\.with\.many\.columns | less \-S
+(you can scorll horizontally with left/right arrows)
 .
 .fi
 .

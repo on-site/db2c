@@ -1,46 +1,45 @@
-A DB2 console with history and autocomplete support, and few other goodies
-====================================
+## DB2 console with history, autocomplete support and few other goodies
 
-DB2 console mode does not support readline and autocomplete, this is a wrapper for the db2 command mode with support for both. It also tries to make using db2 a little bit more tolerable, adding support for psql-like commands and other shortcuts.
+DB2 console mode does not support readline and autocomplete, this is a wrapper for the db2 command mode that adds support for both.
+It also tries to make using db2 a little bit more tolerable, adding support for interactive editing and psql-like meta commands and other shortcuts.
 
-Install
--------
+### Install
 
-* apt-get install [rlwrap][0]
-* gem install db2c
+```
+apt-get install rlwrap
+gem install db2c
+```
 
-Contributing
-------------
+### Examples
 
-Once you've made your great commits:
+```
+db2 => use testdb
+db2(testdb) => current date
+db2(testdb) => -107
+db2(testdb) => history
+db2(testdb) => select * from table.with.many.columns | less -S
+db2(testdb) => edit
+db2(testdb) => ls ~
+db2(testdb) => irb
+db2(testdb) => \l
+db2(testdb) => \lt schema
+db2(testdb) => \dv | grep -v SYS
+db2(testdb) => \d schema.table
+db2(testdb) => help
+```
 
-1. [Fork][1] db2c
-2. Create a topic branch - `git checkout -b my_branch`
-3. Push to your branch - `git push origin my_branch`
-4. Create an [Issue][2] with a link to your branch
-5. That's it!
+### Acknowledgement
 
-Acknowledgement
-------------
+* Chris Jester-Young ([CKY][0]) found out the problem of using shell metacharacters when executing commands from Ruby.
+* The initial script was inspired by [defunkt's repl][1], for a genenral purpose repl/wrapper, this is your friend.
+* Ben Ellis ([benissimo][2]) did all the beta testing
 
-* Chris Jester-Young ([CKY][4]) found out the problem of using shell metacharacters when executing commands from Ruby.
-* The initial script was inspired by [defunkt's repl][3], for a genenral purpose repl/wrapper, this is your friend.
+### See
 
-Meta
-----
+* rlwrap: <http://utopia.knoware.nl/~hlub/rlwrap/>
+* Gem: <http://rubygems.org/gems/db2c>
+* Help page: <https://github.com/on-site/db2c/wiki/db2c-help>
 
-* Code: `git clone git://github.com/on-site/db2c.git`
-* Home: <https://github.com/on-site/db2c>
-* Bugs: <https://github.com/on-site/db2c/issues>
-* Gems: <http://rubygems.org/gems/db2c>
-
-Author
-------
-
-Samer Abukhait <samer@on-siteNOSPAM.com>, @s4mer
-
-[0]: http://utopia.knoware.nl/~hlub/rlwrap/
-[1]: http://help.github.com/forking/
-[2]: https://github.com/on-site/db2c/issues
-[3]: https://github.com/defunkt/repl
-[4]: https://github.com/cky
+[0]: https://github.com/cky
+[1]: https://github.com/defunkt/repl
+[2]: https://github.com/benissimo
